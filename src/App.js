@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
                     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODRkNTI0MTVmNzNjNmY1MjI2ZGM2ZWZjNDE1MzMyMCIsInN1YiI6IjY2NWRhNGNkZDZjYzQxYWUxMGNjNzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SqxSAgnIfRLqw13BQqYaihQhubUYJvCtHFtjSN1v9ZE'
                 }
             }
-            //axios 를 써서 영화 데이터를 받아오는거(url, Auth 를 통해서)/ axios.get(~~) 로 
+            //axios 를 써서 영화 데이터를 받아오는거(url, Auth 를 통해서)/ axios.get(~~) 로
             const result = await axios.get("https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1", config)
             //console.log 찍을때 ("+++", result) 이렇게해서 +++ 찾으면 그 결과 볼수있게 한다.
             console.log("+++++++++++++++++++++++++++", result.data.results)
@@ -27,13 +27,23 @@ const App = () => {
         }
     }
 
+    //자동으로 시작하는 Hook
+    useEffect(() => {
+        getMovies()
+    }, []);
+
     // 3. 함수 실행하는 버튼 만들기
     return (
         <div>
-            {movies.length}
-            <button onClick={()=>{
-                getMovies()
-            }}>버튼 </button>
+            {movies?.map((movie)=>(
+                //setMovies(result.data.results) 안에 title이랑 정보가 있는데, 이게 movie 로 들어갔으니까(setMovie), movie.title 로 영화 제목만 가져온다
+                <div>
+                    <h1>{movie.title}</h1>
+                    <h2>{movie.overview}</h2>
+                    <h3>{movie.popularity}</h3>
+                </div>
+            ))}
+
         </div>
     );
 };
