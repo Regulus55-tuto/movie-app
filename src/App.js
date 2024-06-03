@@ -1,24 +1,20 @@
 import React, {useState} from 'react';
 
 const App = () => {
-    const [movies, setMovies] = useState([
-        {"title": "범죄도시1", "desc":"설명1","category":"카테고리1"},
-        {"title": "범죄도시2", "desc":"설명2","category":"카테고리2"},
-        {"title": "범죄도시3","desc":"설명3","category":"카테고리3"},
-        {"title": "범죄도시4","desc":"설명4","category":"카테고리4"},
-    ])
+    //1. 데이터를 담는 그릇 설정
+    const [movies, setMovies] = useState([])
 
+    //2. 데이터를 호출하는 함수 설정
+    const getMovies = () =>{
+        console.log("getMovies")
+    }
 
-
+    // 3. 함수 실행하는 버튼 만들기
     return (
         <div>
-            {movies && movies.map((movie)=> (
-                <div>
-                    <h1>{movie.title}</h1>
-                    <h2>{movie.desc}</h2>
-                    <h3>{movie.category}</h3>
-                </div>
-            ))}
+            <button onClick={()=>{
+                getMovies()
+            }}>버튼 </button>
         </div>
     );
 };
