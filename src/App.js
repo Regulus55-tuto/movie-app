@@ -1,13 +1,10 @@
 import React from 'react';
-import MovieList from "./MovieList";
-import TVList from "./TVList";
+import {RouterProvider} from "react-router-dom";
+import router from "./router";
 
 const App = () => {
     return (
-        <div>
-            {/*<MovieList/>*/}
-            <TVList/>
-        </div>
+       <RouterProvider router={router}/>
     );
 };
 
