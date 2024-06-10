@@ -26,15 +26,14 @@ const TVList = () => {
     return (
         <container>
             <Row>
-                {tvs?.map((tv) => (
-                    <Col className={"mt-3"}>
+                {tvs?.map((tv, index) => (
+                    <Col className={"mt-3"} key={index}>
                         <Card style={{width: '18rem'}}>
                             <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + tv.poster_path}/>
                             <Card.Body>
-                                <Card.Title>{tv.name.slice(0, 10)}</Card.Title>
+                                <Card.Title><h1>{tv.name.slice(0, 10)}</h1></Card.Title>
                                 <Card.Text>
-                                    <h3>{tv.original_name.slice(0, 10)}</h3>
-                                    <h3>{tv.vote_average}</h3>
+                                    {tv.overview.length === 0 ? "내용없음" : tv.overview.slice(0, 80)}
                                 </Card.Text>
                                 <Button variant="primary">Go somewhere</Button>
                             </Card.Body>
