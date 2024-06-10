@@ -36,7 +36,7 @@ const TVList = () => {
                                 <Card.Text>
                                     {tv.overview.length === 0 ? "내용없음" : tv.overview.slice(0, 80)}
                                 </Card.Text>
-                                <Link to={`/tvdetail/${tv.id}`}>
+                                <Link to={`/tv/${tv.id}`}>
                                     <Button variant="primary">Go somewhere</Button>
                                 </Link>
                             </Card.Body>

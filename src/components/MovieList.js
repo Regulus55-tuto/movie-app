@@ -49,7 +49,7 @@ const MovieList = () => {
                                 <Card.Text>
                                     {movie.overview.slice(0, 80)}
                                 </Card.Text>
-                                <Link to={`/moviedetail/${movie.id}`}>
+                                <Link to={`/movie/${movie.id}`}>
                                     <Button variant="primary">Go detail</Button>
                                 </Link>
                             </Card.Body>
