@@ -1,13 +1,12 @@
 import React from 'react';
-import {RouterProvider} from "react-router-dom";
-import router from "./router";
 import Navbar from "react-bootstrap/Navbar";
 import {Container} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 
-const App = () => {
+
+const Main = () => {
     return (
-        <>
+        <div>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
                     <Navbar.Brand href="/">Movie-app</Navbar.Brand>
@@ -20,10 +19,8 @@ const App = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-
-            <RouterProvider router={router}/>
-        </>
+        </div>
     );
 };
 
-export default App;
+export default Main;

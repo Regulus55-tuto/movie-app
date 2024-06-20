@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const TVList = () => {
     const [tvs, setTvs] = useState([])
@@ -25,7 +28,7 @@ const TVList = () => {
     }, []);
 
     return (
-        <container>
+        <Container>
             <Row>
                 {tvs?.map((tv, index) => (
                     <Col className={"mt-3"} key={index}>
@@ -44,7 +47,8 @@ const TVList = () => {
                     </Col>
                 ))}
             </Row>
-        </container>)
+        </Container>
+    )
 };
 
 export default TVList;

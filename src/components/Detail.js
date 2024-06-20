@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
 import axios from "axios";
+import {Card, Col, Container, Row, Image} from "react-bootstrap";
+import '../App.css'
 
 const Detail = () => {
 
@@ -11,8 +13,8 @@ const Detail = () => {
     console.log(location.pathname.includes('movie'))
     // 위에처럼 하면 movie 가 포함되었는지 여부를 true false 로 알려준다.
     // 그거보고 movie 면 movie쪽으로, 아니면 tv쪽으로 보낼수있음.
-    const getData = async () =>{
-        try{
+    const getData = async () => {
+        try {
             const config = {
                 headers: {
                     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODRkNTI0MTVmNzNjNmY1MjI2ZGM2ZWZjNDE1MzMyMCIsInN1YiI6IjY2NWRhNGNkZDZjYzQxYWUxMGNjNzZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SqxSAgnIfRLqw13BQqYaihQhubUYJvCtHFtjSN1v9ZE'
@@ -22,8 +24,8 @@ const Detail = () => {
             // axios 받아온거에서 movie 가 포함돼있으면 movie의 api를, 안돼있으면 tv의 api를 가져온다.
             setData(result.data)
             console.log(result.data)
-        }catch(err){
-            console.log('---',err)
+        } catch (err) {
+            console.log('---', err)
         }
     }
     useEffect(() => {
@@ -31,11 +33,36 @@ const Detail = () => {
     }, []);
 
     return (
-        <div>
-            {location.pathname.includes('movie') ? data.title : data.name}
-            {/*받아온 데이터 글자에 movie 가 포함돼있으면 title을, 없으면 name을 불러온다*/}
-        </div>
-    );
+        <Container>
+            <Row>
+                <Col className={'mt-3'} xs={5} md={4}>
+                    <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + data.poster_path}/>
+                </Col>
+                <Col className={'mt-3'}>
+                    <h1>{location.pathname.includes('movie') ? data.title : data.name}</h1>
+                    <div>className={'mt-3'}> {data.overview === null ? 'No Overview' : data.overview}</div>
+                    <h3>Popularity : {data.popularity}</h3>
+                    <div>{data.homepage}</div>
+
+                    <Row>
+                        <div>{data?.seasons?.map((d) => (
+                            <Col style={{width: '150px', height: '150px', margin: '10px'}} className={'mt-5'}>
+                                {d.name}
+                                <Image
+                                    src={d.poster_path === null ? 'https://adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg' : 'https://image.tmdb.org/t/p/w500' + d.poster_path}
+                                    style={{width: '150px', height: '150px'}}/>
+                            </Col>
+                        ))}</div>
+                        <div>
+                            {data?.production_countries?.map((d) => (
+                                <Col>{d.name} </Col>
+                            ))}
+                        </div>
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
+    )
 };
 
 export default Detail;
